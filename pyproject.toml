@@ -1,0 +1,93 @@
+[project]
+name = "managed"
+version = "0.1.0"
+description = "「Simple yet Powerful」 dependency injection framework"
+authors = [{ name = "iyanging", email = "iyanging@163.com" }]
+license.file = "LICENSE.txt"
+readme = "README.md"
+requires-python = ">= 3.13"
+dependencies = []
+
+[dependency-groups]
+dev = ["pre-commit>=4.2.0", "pyright>=1.1.402", "pytest>=8.4.1"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pyright]
+stubPath = "./typings"
+typeCheckingMode = "strict"
+enableTypeIgnoreComments = false
+deprecateTypingAliases = true
+reportCallInDefaultInitializer = true
+reportImplicitOverride = true
+reportMissingTypeStubs = false
+reportImportCycles = true
+reportPropertyTypeMismatch = true
+reportShadowedImports = true
+reportUninitializedInstanceVariable = true
+reportUnnecessaryTypeIgnoreComment = true
+reportUnusedCallResult = true
+
+[tool.ruff]
+line-length = 99
+indent-width = 4
+
+[tool.ruff.lint]
+preview = true
+select = [
+    "FAST",
+    "ASYNC",
+    "S",
+    "BLE",
+    "FBT",
+    "B",
+    "A",
+    "C4",
+    "DTZ",
+    "ISC",
+    "LOG",
+    "G",
+    "INP",
+    "PIE",
+    "T20",
+    "PT",
+    "RSE",
+    "SLF",
+    "SIM",
+    "TID",
+    "ARG",
+    "PTH",
+    "FLY",
+    "I",
+    "C90",
+    "N",
+    "PERF",
+    "E",
+    "W",
+    "F",
+    "PL",
+    "UP",
+    "RUF",
+    "TRY",
+]
+fixable = ["ALL"]
+ignore = ["TRY003", "PLR0913", "UP040"]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/**.py" = [
+    "S101",    # Use of `assert` detected
+    "PLC2701", # Private name import `` from external module ``
+    "PLR2004", # Magic value used in comparison, consider replacing `` with a constant variable
+    "TRY002",  # Create your own exception
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+[tool.pytest.ini_options]
+addopts = ["-vv", "--capture=no", "--import-mode=importlib"]
